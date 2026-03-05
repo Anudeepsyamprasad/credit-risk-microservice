@@ -162,3 +162,20 @@ For large-scale deployment:
 - Real-time event streaming integration
 - Distributed tracing support
 - Monitoring dashboard integration
+
+
+Database Layer
+
+This module contains:
+
+• PostgreSQL schema for financial entities
+• Sample dataset for testing
+• Risk evaluation queries
+• Performance optimization indexes
+
+Execution order:
+
+1. schema/01_create_tables.sql
+2. data/02_sample_data.sql
+3. queries/03_risk_queries.sql
+4. indexes/04_indexes.sql
