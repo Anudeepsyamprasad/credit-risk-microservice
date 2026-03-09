@@ -1,5 +1,16 @@
 # Credit Risk & Event Analytics Platform
 
+```markdown
+## Key Technologies
+- Java 17
+- Spring Boot
+- Spring Security (JWT Authentication)
+- PostgreSQL
+- JPA / Hibernate
+- Docker
+- AWS EC2
+- Maven
+
 ## Overview
 
 This project simulates a distributed financial risk evaluation and reporting platform designed to process high-volume loan decision events and generate performance-optimized analytical reports.
@@ -164,7 +175,7 @@ For large-scale deployment:
 - Monitoring dashboard integration
 
 
-Database Layer
+## Database Layer
 
 This module contains:
 
@@ -179,3 +190,118 @@ Execution order:
 2. data/02_sample_data.sql
 3. queries/03_risk_queries.sql
 4. indexes/04_indexes.sql
+
+
+## Project Structure
+
+src/main/java/com/creditrisk
+
+controller
+ - RiskController.java
+ - ReportingController.java
+
+service
+ - RiskEvaluationService.java
+ - ReportingService.java
+
+repository
+ - LoanApplicationRepository.java
+ - RiskEventRepository.java
+
+model
+ - LoanApplication.java
+ - RiskEvent.java
+
+security
+ - JwtAuthenticationFilter.java
+ - SecurityConfig.java
+
+config
+ - DatabaseConfig.java
+
+
+Sample API Example: 
+- POST /api/loan/evaluate
+
+Request:
+{
+  "income": 60000,
+  "creditScore": 720,
+  "existingDebt": 15000
+}
+
+Response:
+{
+  "riskScore": 82,
+  "decision": "APPROVED"
+}
+
+# How to Run the Project
+- Prerequisites
+Make sure the following tools are installed:
+- Java 17+
+- Maven 3.8+
+- Docker & Docker Compose
+- PostgreSQL (if not using Docker)
+
+Verify installation:
+- java -version
+- mvn -version
+- docker --version
+
+### 1. Clone the Repository
+- git clone https://github.com/Anudeepsyamprasad/credit-risk-microservice.git
+- cd credit-risk-microservice
+
+### 2 Start PostgreSQL Database (Docker)
+Run PostgreSQL using Docker:
+- docker-compose up -d
+This will start a PostgreSQL container with the configured database.
+
+Default configuration:
+- Database: creditrisk
+- Username: postgres
+- Password: postgres
+- Port: 5432
+
+### 3 Initialize Database Schema
+Run SQL scripts in order:
+database/schema/01_create_tables.sql
+database/data/02_sample_data.sql
+database/queries/03_risk_queries.sql
+database/indexes/04_indexes.sql
+
+You can run them using:
+psql -U postgres -d creditrisk -f database/schema/01_create_tables.sql
+
+### 4 Build the Spring Boot Application
+- mvn clean install
+
+### 5 Run the Application
+- mvn spring-boot:run
+
+Application will start at:
+"http://localhost:8080"
+
+### 6 Test APIs
+Example API request:
+Evaluate Loan Risk
+POST - /api/loan/evaluate
+
+Example request:
+{
+  "income": 70000,
+  "creditScore": 720,
+  "existingDebt": 15000
+}
+Example response:
+{
+  "riskScore": 82,
+  "decision": "APPROVED"
+}
+
+You can test APIs using:
+- Postman
+- cURL
+- Swagger (if enabled)
+
